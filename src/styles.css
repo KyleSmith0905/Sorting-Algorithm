@@ -1,1 +1,206 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+	margin: 0em;
+	background-color: var(--colorDark1);
+	transition-property: none;
+	transition: background-color ease-in-out 0s;
+	font-family: verdana, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+	--colorDark1: #080000;
+	--colorDark2: #1a0000;
+	--colorDark3: #260000;
+	--colorLight1: #ff1010;
+	--colorLight2: #ff4444;
+	--border: 1.5px solid var(--colorLight1);
+	--transition-time: 500ms;
+}
+
+p, h1, h2, h3, h4, h5, h6, a, li, button {
+	color: var(--colorLight1);
+	word-wrap: break-word;
+	display: inline-block;
+}
+
+header {
+	background-color: var(--colorDark2);
+	border-bottom: var(--border);
+}
+
+header > div {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 60em;
+	margin-left: auto;
+	padding: 0.5em 1.2em;
+	margin-right: auto;
+}
+
+#Title {
+	font-size: 24px;
+	margin: 0;
+	padding: 0;
+}
+
+#SortingWith {
+	margin-top: 0.4em;
+	margin-bottom: 0.25em;
+}
+#SortingWith > span {
+	line-height: 2em;
+}
+
+.Button {
+	text-decoration: underline solid transparent;
+	font-size: 1.1em;
+	background-color: var(--colorDark3);
+	border: var(--border);
+	padding: 10px 15px;
+	cursor: pointer;
+	transition: ease-in-out 0.2s;
+	white-space: nowrap;
+}
+
+.Button > p {
+	display: inline;
+}
+
+.Button:hover {
+	text-decoration-color: var(--colorLight1);
+}
+
+#MainContent {
+	background-color: var(--colorDark1);
+	max-width: 75em;
+	margin: auto;
+}
+
+.Centered {
+	text-align: center;
+	width: 100%;
+}
+
+.HoverBox {
+	text-decoration: underline solid var(--colorLight1);
+}
+
+.Hidden {
+	display: none;
+}
+
+#SelectSortMenu {
+	margin: 1em 1em 0em 1em;
+	padding: 1em;
+	background-color: var(--colorDark2);
+	border: var(--border);
+}
+
+#SelectSortMenu > p {
+	font-size: 2em;
+	margin: 0em 0em 0.8em 0em;
+	text-align: center;
+	width: 100%;
+}
+
+.Grid {
+	display: grid;
+	grid-gap: 1em 1em;
+	grid-auto-rows: 3em;
+	grid-template-columns: repeat(auto-fill, 12em);
+	justify-content: space-around;
+}
+
+.Grid > div {
+	background-color: var(--colorDark3);
+	text-align: center;
+	font-size: 1.2em;
+	cursor: pointer;
+	border: var(--border);
+}
+
+.Grid > div > p {
+	margin-top: 0.6em;
+}
+
+#DataGraph {
+	border: var(--border);
+	background-color: var(--colorDark2);
+	width: 80%;
+	height: 30em;
+	max-width: 70em;
+	margin: 1em auto;
+	display: flex;
+	justify-content: space-around;
+	padding: 1em;
+}
+
+#DataGraph  canvas{
+	border: var(--border);
+}
+
+.InnerBox {
+	margin: 1.4em 1em 0em 1em;
+	padding: 1em;
+	background-color: var(--colorDark2);
+	border: var(--border);
+}
+
+.InnerBox > h2 {
+	margin: 0.1em 0em 1em 0.4em;
+	font-variant: small-caps;
+}
+
+.FormGroup {
+	align-items: center;
+	display: flex;
+}
+
+.FormGroup > p {
+	font-size: 1.1em;
+	width: 18em;
+	display: inline-block;
+}
+
+@media screen and (max-width: 640px) {
+	.FormGroup {
+		display: block;
+	}
+}
+
+.Slider {
+  appearance: none;
+	width: 100%;
+	overflow: hidden;
+  height: 2em;
+  background: var(--colorDark3);
+	border: var(--border);
+  outline: none;
+}
+
+.Slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 2em;
+  height: 2.1em;
+  background: var(--colorLight1);
+  cursor: pointer;
+	transition: background var(--transition-time);
+	transition-timing-function: ease-in-out;
+}
+
+.Slider::-moz-range-thumb {
+  width: 2em;
+  height: 2.1em;
+  background: var(--colorLight1);
+  cursor: pointer;
+	transition: background var(--transition-time);
+	transition-timing-function: ease-in-out;
+}
+
+.Slider::-webkit-slider-thumb:hover {
+  background: var(--colorLight2);
+}
+
+.Slider::-webkit-slider-thumb:hover {
+  background: var(--colorLight2);
+}
