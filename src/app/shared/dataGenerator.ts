@@ -1,51 +1,47 @@
-export interface IDataPoint {
-	color: string;
-	height: number;
-	data: number;
-}
+import { IDataPoint } from "./constants";
 
-export const DataGenerator = (totalPoints: number): Array<IDataPoint> => {
-	let numbers = [];
-  let results: Array<IDataPoint> = [];
+export const DataGenerator = (totalPoints: number, colorFunction: (index: number, totalArray: number, position: number) => string, sampleTypeFunction: (numbers: number[], index: number, totalLength: number) => [number, number]): Array<IDataPoint> => {
 
-	for (let i = 0; i <= totalPoints - 1; i++) {
-		numbers.push(i);
-	}
+	let numbers: number[] = Array.from(Array(totalPoints).keys())	;
+  const results: Array<IDataPoint> = [];
+	let topDataPoint = 0;
+	let extraRandom = false;
 
 	while (numbers.length > 0) {
-		let randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
-		numbers.splice(numbers.indexOf(randomNumber), 1);
+
+		const [dataPosition, dataValue] = sampleTypeFunction(numbers,  totalPoints - numbers.length, totalPoints);
+
+		numbers.splice(numbers.indexOf(dataPosition), 1);
+
 		results.push({
-			color: sineHSVToHex((randomNumber / totalPoints) * 360, 100, 100),
-			height: (100 * (randomNumber)) / (totalPoints - 1),
-			data: randomNumber,
+			height: 0,
+			data: dataValue,
+			color: Number.isNaN(dataPosition) ? '#ff4040' : colorFunction(dataPosition, totalPoints, results.length),
+			id: dataPosition
 		});
-	};
+		if (topDataPoint < dataValue) topDataPoint = dataValue;
+		if (Number.isNaN(dataPosition)) extraRandom = true;
+	}
+
+	if (extraRandom === true) {
+		results.sort((a, b) => a.data - b.data);
+		let resultsLength = results.length;
+
+		for (let i = 0; i < resultsLength; i++) {
+			results[i].color = colorFunction(i, totalPoints, 1);
+			results[i].id = i;
+		}
+
+		for (let i = resultsLength - 1; i > 0; i--) {
+			let j = Math.floor(Math.random() * (i + 1));
+			[results[i], results[j]] = [results[j], results[i]]
+		}
+	}
+
+	for (let i = 0; i < results.length; i++) {
+		const currentResult = results[i];
+		currentResult.height = (100 * currentResult.data) / topDataPoint;
+	}
+
 	return results;
-}
-
-export const sineHSVToHex = (hue: number, saturation: number, value: number): string => {
-	
-	const hueTransform = (-Math.PI * (hue % 360)) / 180 + Math.PI;
-	const saturationScalar = saturation * (128/100);
-	const saturationTransform = saturation * (-128 / 100) + 256;
-	const valueScalar = value / 100;
-
-	const HSVtoElement = (offset: number): number => {
-		let element = Math.floor((Math.sin(hueTransform + (Math.PI * offset)) * saturationScalar + saturationTransform) * valueScalar);
-		if (element > 255) element = 255;
-		else if (element < 0) element = 0;
-		return element;
-	}
-
-	const elementToHex = (element: number): string => {
-		return Math.floor(element).toString(16).padStart(2, '0');
-	}
-	
-	const r = HSVtoElement(3/2);
-	const g = HSVtoElement(1/6);
-	const b = HSVtoElement(5/6);
-
-
-	return '#' + elementToHex(r) + elementToHex(g) + elementToHex(b);
 }

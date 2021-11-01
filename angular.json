@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-app": {
+    "Sorting": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/my-app/browser",
+            "outputPath": "dist/Sorting",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "my-app:build:production"
+              "browserTarget": "Sorting:build:production"
             },
             "development": {
-              "browserTarget": "my-app:build:development"
+              "browserTarget": "Sorting:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "my-app:build"
+            "browserTarget": "Sorting:build"
           }
         },
         "test": {
@@ -102,7 +102,7 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/my-app/server",
+            "outputPath": "dist/Sorting/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json"
           },
@@ -128,12 +128,12 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "my-app:build:development",
-              "serverTarget": "my-app:server:development"
+              "browserTarget": "Sorting:build:development",
+              "serverTarget": "Sorting:server:development"
             },
             "production": {
-              "browserTarget": "my-app:build:production",
-              "serverTarget": "my-app:server:production"
+              "browserTarget": "Sorting:build:production",
+              "serverTarget": "Sorting:server:production"
             }
           },
           "defaultConfiguration": "development"
@@ -147,12 +147,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "my-app:build:production",
-              "serverTarget": "my-app:server:production"
+              "browserTarget": "Sorting:build:production",
+              "serverTarget": "Sorting:server:production"
             },
             "development": {
-              "browserTarget": "my-app:build:development",
-              "serverTarget": "my-app:server:development"
+              "browserTarget": "Sorting:build:development",
+              "serverTarget": "Sorting:server:development"
             }
           },
           "defaultConfiguration": "production"
@@ -160,5 +160,5 @@
       }
     }
   },
-  "defaultProject": "my-app"
+  "defaultProject": "Sorting"
 }

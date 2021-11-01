@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "sorting",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,10 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "dev:ssr": "ng run my-app:serve-ssr",
-    "serve:ssr": "node dist/my-app/server/main.js",
-    "build:ssr": "ng build && ng run my-app:server",
-    "prerender": "ng run my-app:prerender"
+    "dev:ssr": "ng run Sorting:serve-ssr",
+    "serve:ssr": "node dist/Sorting/server/main.js",
+    "build:ssr": "ng build && ng run Sorting:server",
+    "prerender": "ng run Sorting:prerender"
   },
   "private": true,
   "dependencies": {

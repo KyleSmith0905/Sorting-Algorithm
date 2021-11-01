@@ -1,9 +1,8 @@
 body {
 	margin: 0em;
 	background-color: var(--colorDark1);
-	transition-property: none;
-	transition: background-color ease-in-out 0s;
 	font-family: verdana, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+	font-size: 1.1em;
 }
 
 :root {
@@ -22,6 +21,10 @@ p, h1, h2, h3, h4, h5, h6, a, li, button {
 	display: inline-block;
 }
 
+svg, path {
+	transition: ease-in-out 400ms;
+}
+
 header {
 	background-color: var(--colorDark2);
 	border-bottom: var(--border);
@@ -29,11 +32,11 @@ header {
 
 header > div {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
-	max-width: 60em;
+	justify-content: space-around;
+	max-width: 50em;
 	margin-left: auto;
-	padding: 0.5em 1.2em;
+	padding: 0.5em 1em;
 	margin-right: auto;
 }
 
@@ -45,21 +48,23 @@ header > div {
 
 #SortingWith {
 	margin-top: 0.4em;
-	margin-bottom: 0.25em;
+	margin-bottom: 0.1em;
 }
+
 #SortingWith > span {
+	padding: 0.3em 0.4em;
 	line-height: 2em;
 }
 
 .Button {
 	text-decoration: underline solid transparent;
-	font-size: 1.1em;
 	background-color: var(--colorDark3);
 	border: var(--border);
-	padding: 10px 15px;
+	padding: 0.7em 1em;
 	cursor: pointer;
 	transition: ease-in-out 0.2s;
 	white-space: nowrap;
+	font-size: 1em;
 }
 
 .Button > p {
@@ -72,8 +77,8 @@ header > div {
 
 #MainContent {
 	background-color: var(--colorDark1);
-	max-width: 75em;
-	margin: auto;
+	max-width: 65em;
+	margin: auto auto 1em auto;
 }
 
 .Centered {
@@ -89,66 +94,85 @@ header > div {
 	display: none;
 }
 
-#SelectSortMenu {
-	margin: 1em 1em 0em 1em;
-	padding: 1em;
-	background-color: var(--colorDark2);
-	border: var(--border);
-}
-
-#SelectSortMenu > p {
-	font-size: 2em;
-	margin: 0em 0em 0.8em 0em;
-	text-align: center;
-	width: 100%;
-}
-
-.Grid {
-	display: grid;
-	grid-gap: 1em 1em;
-	grid-auto-rows: 3em;
-	grid-template-columns: repeat(auto-fill, 12em);
-	justify-content: space-around;
-}
-
-.Grid > div {
-	background-color: var(--colorDark3);
-	text-align: center;
-	font-size: 1.2em;
-	cursor: pointer;
-	border: var(--border);
-}
-
-.Grid > div > p {
-	margin-top: 0.6em;
-}
-
 #DataGraph {
 	border: var(--border);
 	background-color: var(--colorDark2);
 	width: 80%;
-	height: 30em;
-	max-width: 70em;
+	height: 32em;
+	max-width: 65em;
 	margin: 1em auto;
 	display: flex;
 	justify-content: space-around;
 	padding: 1em;
 }
 
-#DataGraph  canvas{
+#DataGraph canvas{
 	border: var(--border);
 }
 
+
+#BottomMenu {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+#BottomMenu > * {
+	padding: 0em 0.6em;
+	margin: 0.5em;
+	display: flex;
+	align-items: center;
+}
+
+#BottomMenu > *[hidden] {
+	display: none;
+}
+
+#BottomMenu > * h2 {
+	padding-right: 0.6em;
+	font-size: 1.35em;
+	margin: 0.4em 0.2em;
+	font-variant: small-caps;
+}
+
+#SelectedSettings h2 {
+	font-variant: small-caps;
+	margin: 0.3em 0em 0em 0em;
+}
+
+#SelectedSettings p {
+	margin: 0.8em 0em 0.8em 0em;
+}
+
+#GoBack {
+	margin: 1em 0em 0em 0em;
+	display: flex;
+	justify-content: center;
+	font-size: 1.2em;
+}
+
+.Grid {
+	display: grid;
+	grid-auto-rows: 5em;
+	grid-template-columns: repeat(auto-fill, 10em);
+  grid-column-gap: 0.6em;
+	font-size: 1.1em;
+}
+
 .InnerBox {
-	margin: 1.4em 1em 0em 1em;
-	padding: 1em;
+	margin: 1.2em 1.2em 0em 1.2em;
+	padding: 0.4em 1.5em 0.9em 1.5em;
 	background-color: var(--colorDark2);
 	border: var(--border);
 }
 
+.InnerBox p {
+	font-size: 1.05em;
+}
+
 .InnerBox > h2 {
-	margin: 0.1em 0em 1em 0.4em;
 	font-variant: small-caps;
+	margin: 0.4em 0em 0em 0em;
 }
 
 .FormGroup {
@@ -158,8 +182,25 @@ header > div {
 
 .FormGroup > p {
 	font-size: 1.1em;
-	width: 18em;
+	width: 17em;
 	display: inline-block;
+}
+
+#GraphControls {
+	display: flex;
+	justify-content: center;
+}
+
+#ErrorMessage {
+	display: block;
+	margin: 0.2em;
+	text-align: center;
+	font-style: oblique;
+	font-size: 1.1em;
+}
+
+#ErrorMessage:empty {
+	display: none;
 }
 
 @media screen and (max-width: 640px) {
@@ -172,7 +213,7 @@ header > div {
   appearance: none;
 	width: 100%;
 	overflow: hidden;
-  height: 2em;
+  height: 1.9em;
   background: var(--colorDark3);
 	border: var(--border);
   outline: none;
@@ -180,8 +221,8 @@ header > div {
 
 .Slider::-webkit-slider-thumb {
   appearance: none;
-  width: 2em;
-  height: 2.1em;
+  width: 1.9em;
+  height: 2em;
   background: var(--colorLight1);
   cursor: pointer;
 	transition: background var(--transition-time);
@@ -189,8 +230,8 @@ header > div {
 }
 
 .Slider::-moz-range-thumb {
-  width: 2em;
-  height: 2.1em;
+  width: 1.9em;
+  height: 2em;
   background: var(--colorLight1);
   cursor: pointer;
 	transition: background var(--transition-time);
