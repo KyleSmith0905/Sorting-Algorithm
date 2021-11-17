@@ -1,0 +1,58 @@
+<div id='BottomMenu' class='InnerBox'>
+	<div collapsed='false' class='Button' (click)='ShowMenu($event)'>
+		<svg width=50 height=30>
+			<path d='M 5,5 L 25,20 L 25,20 L 45,5' stroke-width=7 fill='transparent'>
+			</path>
+		</svg>
+		<h2>Statistics</h2>
+	</div>
+	<div collapsed='true' class='Button' (click)='ShowMenu($event)'>
+		<svg width=50 height=30>
+			<path d='M 5,25 L 5,5 L 45,5 L 45,25' stroke-width=7 fill='transparent'>
+			</path>
+		</svg>
+		<h2>Sorting Settings</h2>
+	</div>
+	<div collapsed='true' class='Button' (click)='ShowMenu($event)'>
+		<svg width=50 height=30>
+			<path d='M 5,25 L 5,5 L 45,5 L 45,25' stroke-width=7 fill='transparent'>
+			</path>
+		</svg>
+		<h2>Visual Settings</h2>
+	</div>
+	<div collapsed='true' class='Button' (click)='ShowMenu($event)'>
+		<svg width=50 height=30>
+			<path d='M 5,25 L 5,5 L 45,5 L 45,25' stroke-width=7 fill='transparent'>
+			</path>
+		</svg>
+		<h2>Sound Settings</h2>
+	</div>
+	<div [hidden]="SortingAlgorithm !== 'Radix Sort'" collapsed='true' class='Button' (click)='ShowMenu($event)'>
+		<svg width=50 height=30>
+			<path d='M 5,25 L 5,5 L 45,5 L 45,25' stroke-width=7 fill='transparent'>
+			</path>
+		</svg>
+		<h2>Radix Sort Settings</h2>
+	</div>
+	<div [hidden]="SortingAlgorithm !== 'Shell Sort'" collapsed='true' class='Button' (click)='ShowMenu($event)'>
+		<svg width=50 height=30>
+			<path d='M 5,25 L 5,5 L 45,5 L 45,25' stroke-width=7 fill='transparent'>
+			</path>
+		</svg>
+		<h2>Shell Sort Settings</h2>
+	</div>
+	<div [hidden]="SortingAlgorithm !== 'Bucket Sort'" collapsed='true' class='Button' (click)='ShowMenu($event)'>
+		<svg width=50 height=30>
+			<path d='M 5,25 L 5,5 L 45,5 L 45,25' stroke-width=7 fill='transparent'>
+			</path>
+		</svg>
+		<h2>Bucket Sort Settings</h2>
+	</div>
+	<div [hidden]="SortingAlgorithm !== 'Sample Sort'" collapsed='true' class='Button' (click)='ShowMenu($event)'>
+		<svg width=50 height=30>
+			<path d='M 5,25 L 5,5 L 45,5 L 45,25' stroke-width=7 fill='transparent'>
+			</path>
+		</svg>
+		<h2>Sample Sort Settings</h2>
+	</div>
+</div>

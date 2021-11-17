@@ -1,0 +1,23 @@
+<div id='SortingWith' class='LimitLength InnerBox' (window:resize)="onResize()">
+	<h1 class='Centered'>
+		Sorting with 
+		<a routerLink='select algorithm' class='Button'>{{SortingAlgorithm}}</a>
+	</h1>
+</div>
+<p id='ErrorMessage'>{{ErrorMessage}}</p>
+<div id='TwoPanels'>
+	<div>
+		<canvas id='DataGraph' class='InnerBox' width=450 height=350></canvas>
+		<div id='GraphControls' class='InnerBox'>
+			<button class='Button' (click)='ResetGraph()'>
+				<p>Reset Graph</p>
+			</button>
+		</div>
+	</div>
+	<div>
+		<component-menu [SortingAlgorithm]='SortingAlgorithm'>
+		</component-menu>
+		<component-submenu [Coordinates]='Coordinates'>
+		</component-submenu>
+	</div>
+</div>

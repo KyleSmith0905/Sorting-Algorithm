@@ -1,0 +1,24 @@
+import { IDataPoint } from 'src/shared/interfaces';
+
+export const name = 'Circle Graph';
+export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, activeColor: () => string) => {
+	const context = canvas.getContext('2d');
+	if (!context) return;
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	
+	const circumference = Math.PI * 2;
+	const dataLength = array.length;
+	const offset = Math.PI * 1.5;
+	const radiusX = canvas.width / 2;
+	const radiusY = canvas.height / 2;
+
+	for (let i = 0; i < dataLength; i++) {
+		const currentPoint = array[i];
+		if (currentPoint.highlight === true) context.fillStyle = activeColor();
+		else context.fillStyle = currentPoint.color;
+		context.beginPath();
+		context.arc(radiusX, radiusY, radiusY, (i / dataLength) * circumference + offset, ((i + 1) / dataLength) * circumference + 0.003 + offset);
+		context.lineTo(radiusX, radiusY);
+		context.fill();
+	}
+};

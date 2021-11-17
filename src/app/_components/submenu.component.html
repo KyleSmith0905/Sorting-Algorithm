@@ -1,0 +1,80 @@
+<div id='SelectedSettings' class='InnerBox'>
+	<div>
+		<h2>Statistics</h2>
+		<p id='StatisticsSortDescription'></p>
+		<p id='StatisticsSortExample'></p>
+	</div>
+	<div hidden>
+		<h2>Sorting Settings</h2>
+		<div class='FormGroup'>
+			<p id='SortSpeedText'>Sorting Speed:</p>
+			<input id='SortSpeed' class='Slider' type='Range' step=0.5 min=0 max=10 value=0 (input)='SetSpeed($event)'>
+		</div>
+		<div class='FormGroup'>
+			<p id='SampleSizeText'>Sample Size:</p>
+			<input id='SampleSize' class='Slider' type='Range' step=0.5 min=2 max=14 value=0 (input)='SetSample($event)'>
+		</div>
+		<div class='FormGroup'>
+			<p id='SampleTypeText'>Sample Type:</p>
+			<input id='SampleType'class='Slider' type='Range' step=1 min=0 max=5 value=0 (input)='SetSampleType($event)'>
+		</div>
+	</div>
+	<div hidden>
+		<h2>Visual Settings</h2>
+		<div class='FormGroup'>
+			<p id='GraphTypeText'>Graph Type:</p>
+			<input id='GraphType' class='Slider' type='Range' step=1 min=0 max=4 value=0 (input)='SetGraphType($event)'>
+		</div>
+		<div class='FormGroup'>
+			<p id='GraphColorText'>Graph Colors:</p>
+			<input id='GraphColor' class='Slider' type='Range' step=1 min=0 max=3 value=0 (input)='SetGraphColor($event)'>
+		</div>
+		<div class='FormGroup'>
+			<p id='ShowSweeperText'>Show Sweeper:</p>
+			<input id='ShowSweeper' class='Slider' type='Range' step=1 min=0 max=1 value=0 (input)='SetShowSweeper($event)'>
+		</div>
+	</div>
+	<div hidden>
+		<h2>Sound Settings</h2>
+		<div class='FormGroup'>
+			<p id='SoundTypeText'>Sound:</p>
+			<input id='SoundType' class='Slider' type='Range' step=1 min=0 max=1 value=0 (input)='SetSoundType($event)'>
+		</div>
+		<div class='FormGroup'>
+			<p id='SoundVolumeText'>Volume:</p>
+			<input id='SoundVolume' class='Slider' type='Range' step=0.01 min=0 max=2 value=0 (input)='SetSoundVolume($event)'>
+		</div>
+	</div>
+	<div hidden>
+		<h2>Radix Sort Settings</h2>
+		<div class='FormGroup'>
+			<p id='RadixSortByText'>Sort By:</p>
+			<input id='RadixSortBy' class='Slider' type='Range' step=1 min=0 max=1 value=0 (input)='SetRadixSortBy($event)'>
+		</div>
+		<div class='FormGroup'>
+			<p id='RadixSortRadixText'>Radix:</p>
+			<input id='RadixSortRadix' class='Slider' type='Range' step=1 min=2 max=16 value=0 (input)='SetRadixSortRadix($event)'>
+		</div>
+	</div>
+	<div hidden>
+		<h2>Shell Sort Settings</h2>
+		<div class='FormGroup'>
+			<p id='ShellSortGrapText'>Gap Sequence:</p>
+			<input id='ShellSortGap' class='Slider' type='Range' step=1 min=0 max=3 value=0 (input)='SetShellSortGap($event)'>
+		</div>
+	</div>
+	<div hidden>
+		<h2>Bucket Sort Settings</h2>
+		<div class='FormGroup'>
+			<p id='BucketSortSizeText'>Bucket Size:</p>
+			<input id='BucketSortSize' class='Slider' type='Range' step=1 min=2 max=32 value=0 (input)='SetBucketSortSize($event)'>
+		</div>
+	</div>
+	<div hidden>
+		<h2>Sample Sort Settings</h2>
+		<div class='FormGroup'>
+			<p id='SampleSortSizeText'>Bucket Size:</p>
+			<input id='SampleSortSize' class='Slider' type='Range' step=1 min=2 max=32 value=0 (input)='SetSampleSortSize($event)'>
+		</div>
+	</div>
+</div>
