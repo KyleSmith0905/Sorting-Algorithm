@@ -32,6 +32,9 @@ export const algorithm = (arr: IDataPoint[], data: any): [IDataPoint[], any] => 
 		}
 
 		startArray.forEach((ele: IDataPoint, index: number) => {
+
+			const timestamp = (Math.random() * Math.pow(data.settings.sortingSpeed / 4, 2)) + ele.data * Math.pow(data.timesSorted + 1, 2) * (data.settings.sortingSpeed / 4);
+
 			window.setTimeout(() => {
 				data.actionPoint = ele;
 				data.highlight.push(index);
@@ -46,7 +49,7 @@ export const algorithm = (arr: IDataPoint[], data: any): [IDataPoint[], any] => 
 						data.isSorting = false;
 					}, 10);
 				}
-			}, ele.data * Math.pow(data.timesSorted + 1, 2) * (data.settings.sortingSpeed / 4));
+			}, timestamp);
 		});
 	}
 	else {
