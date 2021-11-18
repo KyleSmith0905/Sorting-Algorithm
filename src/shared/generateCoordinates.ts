@@ -1,6 +1,5 @@
 import { graphColors, sampleOrders, sampleTypes, settings } from 'src/settings';
 import { IDataPoint } from './interfaces';
-import { sortGraph } from './sortGraph';
 
 /**
  * Generate random coordinates using settings.
