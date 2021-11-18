@@ -28,7 +28,6 @@ export class HomeComponent {
 		
 		const setInput = (setting: string, fallback: number) => {
 			const cookie = GetCookie(setting) ?? fallback;
-			if (setting === 'GraphColor') console.log(cookie);
 			(<HTMLInputElement>document.getElementById(setting)).setAttribute('value', cookie.toString());
 			(<HTMLInputElement>document.getElementById(setting)).dispatchEvent(new Event('input'));
 		};
