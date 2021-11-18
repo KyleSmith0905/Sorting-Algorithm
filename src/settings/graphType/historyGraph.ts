@@ -1,8 +1,13 @@
 import { IDataPoint } from 'src/shared/interfaces';
+import { graphColors, settings } from '../';
 
 export const name = 'History Graph';
 
-export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, activeColor: () => string, data: any) => {
+export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, data: any) => {
+
+	const graphColor = graphColors.find(e => e.name === settings.GraphColor);
+	if (graphColor === undefined) return;
+
 	const context = canvas.getContext('2d');
 	if (!context) return;
 	const highlight: number[] = [];
@@ -11,7 +16,6 @@ export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, active
 		data.interval = 1;
 		data.intervalLength = 1;
 		data.reference = array.map(e => e.id);
-		data.colorReference = array.map(e => e.color);
 		data.memoryArray = [Array.from(Array(array.length).keys())];
 	}
 
@@ -37,10 +41,13 @@ export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, active
 	const halfWidth = context.lineWidth / 2;
 	const adjustedLength = arrayLengthX + (data.interval / data.intervalLength) - 1;
 
+	console.log(data.memoryArray);
+
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	for (let i = 0; i < arrayLengthY; i++) {
-		if (highlight.some(e => e === currentLocation[i]) === true) context.strokeStyle = activeColor();
-		else context.strokeStyle = array[currentLocation[i]]?.color;
+		if (highlight.some(e => e === currentLocation[i]) === true) context.strokeStyle = graphColor?.highlightColor();
+		else context.strokeStyle = graphColor.color(data.reference.length, i, data.reference[i]);
+
 		context.beginPath();
 		let pickedUp = false;
 		for (let j = 0; j < arrayLengthX; j++) {
