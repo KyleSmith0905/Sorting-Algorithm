@@ -1,7 +1,12 @@
 import { IDataPoint } from 'src/shared/interfaces';
+import { graphColors, settings } from '../';
 
 export const name = 'Dot Graph';
-export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, activeColor: () => string) => {
+export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, data: any) => {
+	
+	const graphColor = graphColors.find(e => e.name === settings.GraphColor);
+	if (graphColor === undefined) return;
+	
 	const context = canvas.getContext('2d');
 	if (!context) return;
 	context.clearRect(0, 0, canvas.width, canvas.height);
@@ -13,8 +18,10 @@ export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, active
 	if (dotSize > 2) {
 		for (let i = 0; i < dataLength; i++) {
 			const currentPoint = array[i];
-			if (currentPoint.highlight === true) context.fillStyle = activeColor();
+
+			if (currentPoint.highlight === true) context.fillStyle = graphColor.highlightColor();
 			else context.fillStyle = currentPoint.color;
+
 			context.beginPath();
 			context.ellipse(((i + 1) / (dataLength + 2)) * canvas.width, canvas.height - (currentPoint.height * graphYScalar) - dotSize, dotSize, dotSize, 0, 0, 2 * Math.PI);
 			context.fill();
@@ -24,8 +31,10 @@ export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, active
 		for (let i = 0; i < dataLength; i+= 0.5) {
 			const currentPoint = array[i];
 			i += 0.5;
-			if (currentPoint.highlight === true) context.fillStyle = activeColor();
+			
+			if (currentPoint.highlight === true) context.fillStyle = graphColor.highlightColor();
 			else context.fillStyle = currentPoint.color;
+
 			context.beginPath();
 			context.fillRect((i / dataLength) * canvas.width, canvas.height - (currentPoint.height * graphYScalar), dotSize * 2, dotSize * 2);
 		}

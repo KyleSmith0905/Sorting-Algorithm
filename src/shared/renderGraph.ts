@@ -1,5 +1,5 @@
 import { IDataPoint } from './interfaces';
-import { graphColors, graphTypes, settings } from '../settings';
+import { graphTypes, settings } from '../settings';
 
 /**
  * Renders the graph's canvas element.
@@ -7,12 +7,11 @@ import { graphColors, graphTypes, settings } from '../settings';
  */
 export const RenderGraph = (coordinates: IDataPoint[] | undefined, graphData?: any) => {
 	if (coordinates === undefined) return;
+
 	const graph = <HTMLCanvasElement>document.getElementById('DataGraph');
+	const graphType = graphTypes.find(e => e.name === settings.GraphType);
 
-	const graphTypeFunction = graphTypes.find(e => e.name === settings.GraphType)?.algorithm;
-	const graphColorActiveFunction = graphColors.find(e => e.name === settings.GraphColor)?.highlightColor;
+	if (graphType === undefined || graph === undefined) return;
 
-	if (graphTypeFunction === undefined || graphColorActiveFunction === undefined || graph === undefined) return;
-
-	graphTypeFunction(coordinates, graph, graphColorActiveFunction, graphData ?? {});
+	graphType.algorithm(coordinates, graph, graphData ?? {});
 };

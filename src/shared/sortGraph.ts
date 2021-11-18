@@ -1,6 +1,6 @@
 import { GenerateCoordinates } from './generateCoordinates';
 import { RenderGraph } from './renderGraph';
-import { sortingAlgorithms, graphColors, graphTypes, soundTypes, settings } from '../settings';
+import { sortingAlgorithms, soundTypes, settings } from '../settings';
 import { HomeComponent } from 'src/app/home/home.component';
 import { isArraySorted } from './utils';
 
@@ -10,10 +10,11 @@ import { isArraySorted } from './utils';
  * @param {string} message - The error message.
  */
 const suspendSorting = (app: HomeComponent, graphData: any, message?: string) => {
+	graphData.done = true;
 	if (typeof message === 'string') app.ErrorMessage = 'Error: ' + message;
 	app.Oscillator?.stop();
 	window.clearInterval(app.SortingInterval);
-	RenderGraph(app.Coordinates, graphData ?? {});
+	RenderGraph(app.Coordinates, graphData);
 	return;
 };
 
@@ -95,17 +96,7 @@ export const sortGraph = (app: HomeComponent) => {
 	
 	app.SortingInterval = window.setInterval(() => {
 		
-		const graphTypeFunction = graphTypes.find(e => e.name === settings.GraphType)?.algorithm;
-		const graphColorActiveFunction = graphColors.find(e => e.name === settings.GraphColor)?.highlightColor;
-		if (graphColorActiveFunction === undefined) return suspendSorting(app, graphData, 'Graph Color not found');
-		if (graphTypeFunction === undefined) return suspendSorting(app, graphData, 'Graph Type not found');
-
-		if (app.Coordinates === undefined) {
-			app.ErrorMessage = 'Error: There is not enough valid data points to sort.';
-			app.Oscillator?.stop();
-			window.clearInterval(app.SortingInterval);
-			return;
-		}
+		if (app.Coordinates === undefined) return suspendSorting(app, graphData, 'There is not enough valid data points to sort.');
 		
 		if (data.stop == true && app.SortingInterval !== undefined) {
 			let error: string | undefined;
@@ -113,15 +104,11 @@ export const sortGraph = (app: HomeComponent) => {
 				if (typeof data.error === 'string') error = 'Error: ' + data.error;
 				else error = 'Error: ' + settings.SortingAlgorithm + ' left your data unsorted.';
 			}
-			app.Oscillator?.stop();
-			graphData.done = true;
 			return suspendSorting(app, graphData, error);
 		}
 		
 		data.highlight = [];
-		for (let i = 0; i < speedPass; i++) {
-			[app.Coordinates, data] = sortingAlgorithm.algorithm(app.Coordinates, data);
-		}
+		for (let i = 0; i < speedPass; i++) [app.Coordinates, data] = sortingAlgorithm.algorithm(app.Coordinates, data);
 		
 		if (data.actionPoint !== undefined && app.Oscillator !== undefined) {
 			gain.gain.value = settings.SoundVolume;
