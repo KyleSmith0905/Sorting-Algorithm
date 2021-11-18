@@ -1,7 +1,7 @@
 import { IDataPoint } from 'src/shared/interfaces';
 
 export const name = 'History Graph';
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, activeColor: () => string, data: any) => {
 	const context = canvas.getContext('2d');
 	if (!context) return;

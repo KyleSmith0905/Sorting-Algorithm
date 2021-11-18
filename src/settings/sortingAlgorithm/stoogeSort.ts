@@ -28,7 +28,6 @@ export const algorithm = (arr: IDataPoint[], data: any): [IDataPoint[], any] => 
 		}
 
 		const currentNest = data.nest.shift();
-		
 
 		data.highlight.push(currentNest[0], currentNest[1]);
 		data.actionPoint = arr[currentNest[0]];

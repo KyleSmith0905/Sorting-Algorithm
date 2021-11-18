@@ -1,6 +1,6 @@
 export const name = 'Gray';
-export const color = (index: number, totalArray: number) => {
-	const grayHex = Math.floor((index / totalArray) * 255).toString(16).padStart(2, '0');
+export const color = (totalLength: number, startPosition: number, endPosition: number) => {
+	const grayHex = Math.floor((endPosition / totalLength) * 255).toString(16).padStart(2, '0');
 	return '#' + grayHex + grayHex + grayHex;
 };
 

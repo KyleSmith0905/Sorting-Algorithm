@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { graphColors, graphTypes, sampleTypes, settings, soundTypes } from 'src/settings';
-import { SetCookie } from 'src/shared/cookies';
-import { IDataPoint } from 'src/shared/interfaces';
-import { RenderGraph } from 'src/shared/renderGraph';
+import { graphColors, graphTypes, sampleOrders, sampleTypes, settings, soundTypes } from '../../settings';
+import { SetCookie } from '../../shared/cookies';
+import { IDataPoint } from '../../shared/interfaces';
+import { RenderGraph } from '../../shared/renderGraph';
 
 @Component({
 	selector: 'component-submenu',
@@ -66,10 +66,13 @@ export class submenuComponent {
 		for (let i = 0; i < dataLength; i++) {
 			data[i].index = i;
 		}
+
 		data.sort((a, b) => a.id - b.id);
+
 		for (let i = 0; i < dataLength; i++) {
-			data[i].color = graphColors[index].color(i, dataLength, data[i].index ?? i);
+			data[i].color = graphColors[index].color(dataLength, i, data[i].index ?? i);
 		}
+		
 		data.sort((a, b) => {
 			if (a.index !== undefined && b.index !== undefined) return a.index - b.index;
 			return 0;
@@ -103,6 +106,18 @@ export class submenuComponent {
 		
 		const textElement = document.getElementById('SampleTypeText');
 		if (textElement instanceof HTMLElement) textElement.innerText = 'Sample Type: ' + val;
+	}
+
+	SetSampleOrder(object: Event | number) {
+		if (typeof object !== 'number') {
+			object = (<HTMLInputElement>object.currentTarget).valueAsNumber;
+			SetCookie('SampleOrder', object.toString());
+		}
+		const val = sampleOrders[Math.round(object)].name;
+		settings.SampleOrder = val;
+		
+		const textElement = document.getElementById('SampleOrderText');
+		if (textElement instanceof HTMLElement) textElement.innerText = 'Sample Order: ' + val;
 	}
 	
 	SetSoundType(object: Event | number) {

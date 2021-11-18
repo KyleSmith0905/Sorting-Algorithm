@@ -1,7 +1,6 @@
-import { getRandomNumber } from './_shared';
-
 export const name = 'Constant';
-export const algorithm = (_: number[], __: number): [number, number] => {
-	const value = getRandomNumber([0, 1, 2, 3, 4]);
-	return [Number.NaN, value];
+export const algorithm = (index: number, totalLength: number): number => {
+	const sectionLength = Math.sqrt(totalLength);
+	const value = Math.floor(index / sectionLength);
+	return value;
 };

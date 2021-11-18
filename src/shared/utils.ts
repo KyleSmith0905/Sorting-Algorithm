@@ -1,29 +1,18 @@
 import { IDataPoint } from './interfaces';
-import { graphColors, settings } from '../settings';
 /**
  * Randomizes a set of coordinates.
- * @param {IDataPoint[]}coordinates - The coordinates's of the graph.
+ * @param {IDataPoint[]} coordinates - The coordinates's of the graph.
  * @returns {IDataPoint[]} The randomized coordinates.
  */
-export const randomizeArray = (coordinates: IDataPoint[]) => {
+export const randomizeArray = (coordinates: IDataPoint[]): IDataPoint[] => {
 	const coordinatesLength = coordinates.length;
-	const colorFunction = graphColors?.find(e => e.name === settings.GraphColor)?.color;
-	if (colorFunction === undefined) return;
 
 	for (let i = 0; i < coordinatesLength; i++) {
-		let lowestValueIndex = 0;
-		let lowestValue = Number.POSITIVE_INFINITY;
-
-		for (let j = 0; j < coordinatesLength; j++) {
-			if (lowestValue > coordinates[j].data && isNaN(coordinates[j].id)) {
-				lowestValueIndex = j;
-				lowestValue = coordinates[j].data;
-			}
-		}
-
-		coordinates[lowestValueIndex].color = colorFunction(i, coordinatesLength, lowestValueIndex);
-		coordinates[lowestValueIndex].id = i;
+		const j = Math.floor(Math.random() * (coordinatesLength - i + 1));
+		[coordinates[i], coordinates[j]] = [coordinates[j], coordinates[i]];
 	}
+
+	return coordinates;
 };
 
 /**

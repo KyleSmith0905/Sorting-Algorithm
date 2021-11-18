@@ -40,6 +40,7 @@ export class HomeComponent {
 		setInput('GraphType', defaultSettings.GraphType);
 		setInput('GraphColor', defaultSettings.GraphColor);
 		setInput('SampleType', defaultSettings.SampleType);
+		setInput('SampleOrder', defaultSettings.SampleOrder);
 		setInput('SoundType', defaultSettings.SoundType);
 		setInput('SoundVolume', defaultSettings.SoundVolume);
 		setInput('ShowSweeper', defaultSettings.ShowSweeper);

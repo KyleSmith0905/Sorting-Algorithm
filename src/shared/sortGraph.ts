@@ -9,10 +9,11 @@ import { isArraySorted } from './utils';
  * @param {HomeComponent} app - The component containing app variables.
  * @param {string} message - The error message.
  */
-const suspendSorting = (app: HomeComponent, message?: string) => {
+const suspendSorting = (app: HomeComponent, graphData: any, message?: string) => {
 	if (typeof message === 'string') app.ErrorMessage = 'Error: ' + message;
 	app.Oscillator?.stop();
 	window.clearInterval(app.SortingInterval);
+	RenderGraph(app.Coordinates, graphData ?? {});
 	return;
 };
 
@@ -60,7 +61,7 @@ export const sortGraph = (app: HomeComponent) => {
 	RenderGraph(app.Coordinates);
 
 	const sortingAlgorithm = sortingAlgorithms.find(e => e.name === settings.SortingAlgorithm);
-	if (sortingAlgorithm === undefined) return suspendSorting(app, 'Sorting Algorithm not found');
+	if (sortingAlgorithm === undefined) return suspendSorting(app, {}, 'Sorting Algorithm not found');
 
 	const sortDescription = document.getElementById('StatisticsSortDescription');
 	const sortExample = document.getElementById('StatisticsSortExample');
@@ -96,8 +97,8 @@ export const sortGraph = (app: HomeComponent) => {
 		
 		const graphTypeFunction = graphTypes.find(e => e.name === settings.GraphType)?.algorithm;
 		const graphColorActiveFunction = graphColors.find(e => e.name === settings.GraphColor)?.highlightColor;
-		if (graphColorActiveFunction === undefined) return suspendSorting(app, 'Graph Color not found');
-		if (graphTypeFunction === undefined) return suspendSorting(app, 'Graph Type not found');
+		if (graphColorActiveFunction === undefined) return suspendSorting(app, graphData, 'Graph Color not found');
+		if (graphTypeFunction === undefined) return suspendSorting(app, graphData, 'Graph Type not found');
 
 		if (app.Coordinates === undefined) {
 			app.ErrorMessage = 'Error: There is not enough valid data points to sort.';
@@ -114,7 +115,7 @@ export const sortGraph = (app: HomeComponent) => {
 			}
 			app.Oscillator?.stop();
 			graphData.done = true;
-			return suspendSorting(app, error);
+			return suspendSorting(app, graphData, error);
 		}
 		
 		data.highlight = [];

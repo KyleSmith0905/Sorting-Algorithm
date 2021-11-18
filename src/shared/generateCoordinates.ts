@@ -1,59 +1,48 @@
-import { graphColors, sampleTypes, settings } from 'src/settings';
+import { graphColors, sampleOrders, sampleTypes, settings } from 'src/settings';
 import { IDataPoint } from './interfaces';
-import { randomizeArray } from './utils';
+import { sortGraph } from './sortGraph';
 
 /**
- * Generate random coordinates using options.
+ * Generate random coordinates using settings.
  * @returns {IDataPoint[]}} - The coordinates.
  */
 export const GenerateCoordinates = (): Array<IDataPoint> => {
 	const sampleSize = settings.SampleSize;
-	const colorFunction = graphColors?.find(e => e.name === settings.GraphColor)?.color;
-	const sampleFunction = sampleTypes?.find(e => e.name === settings.SampleType)?.algorithm;
 
-	if (colorFunction === undefined || sampleFunction === undefined) return [];
+	const colorFunction = graphColors.find(e => e.name === settings.GraphColor)?.color;
+	const sampleTypeFunction = sampleTypes.find(e => e.name === settings.SampleType)?.algorithm;
+	const sampleOrderFunction = sampleOrders.find(e => e.name === settings.SampleOrder)?.algorithm;
 
-	const numbers: number[] = Array.from(Array(sampleSize).keys())	;
-	const coordinates: Array<IDataPoint> = [];
+	if (colorFunction === undefined || sampleTypeFunction === undefined || sampleOrderFunction === undefined) return [];
+	
+	let coordinates: Array<IDataPoint> = [];
 	let topDataPoint = 0;
-	let extraRandom = false;
 
-	while (numbers.length > 0) {
-
-		const [dataPosition, dataValue] = sampleFunction(numbers,  sampleSize - numbers.length, sampleSize);
-
-		numbers.splice(numbers.indexOf(dataPosition), 1);
+	for (let i = 0; i < sampleSize; i++) {
+		const dataValue = sampleTypeFunction(i, sampleSize);
 
 		coordinates.push({
 			height: 0,
 			data: dataValue,
-			color: Number.isNaN(dataPosition) ? '#ff4040' : colorFunction(dataPosition, sampleSize, coordinates.length),
-			id: dataPosition
+			color: '#ff4040',
+			id: -1,
 		});
 		if (topDataPoint < dataValue) topDataPoint = dataValue;
-		if (Number.isNaN(dataPosition)) extraRandom = true;
 	}
+
+	coordinates = coordinates.sort((a, b) => a.data - b.data);
+	
+	for (let i = 0; i < coordinates.length; i++) {
+		coordinates[i].id = i;
+	}
+
+	coordinates = sampleOrderFunction(coordinates);
 
 	for (let i = 0; i < coordinates.length; i++) {
 		const currentResult = coordinates[i];
 		currentResult.height = (100 * currentResult.data) / topDataPoint;
+		currentResult.color = colorFunction(coordinates.length, i, currentResult.id);
 	}
-
-	if (extraRandom === true) {
-		const resultsLength = coordinates.length;
-
-
-		for (let i = 0; i < resultsLength; i++) {
-			(coordinates[i].id as number | undefined) = undefined;
-		}
-
-		for (let i = 0; i < resultsLength; i++) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[coordinates[i], coordinates[j]] = [coordinates[j], coordinates[i]];
-		}
-		
-		randomizeArray(coordinates);
-	}
-
+	
 	return coordinates;
 };
