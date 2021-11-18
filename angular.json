@@ -21,6 +21,7 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.json",
             "assets": [
               "src/favicon.ico"
 						],
@@ -85,7 +86,7 @@
           "options": {
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
+            "tsConfig": "tsconfig.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
@@ -101,7 +102,8 @@
           "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist/Sorting/server",
-            "main": "server.ts"
+            "main": "server.ts",
+            "tsConfig": "tsconfig.json"
 					},
           "configurations": {
             "production": {
