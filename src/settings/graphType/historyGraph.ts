@@ -41,8 +41,6 @@ export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, data: 
 	const halfWidth = context.lineWidth / 2;
 	const adjustedLength = arrayLengthX + (data.interval / data.intervalLength) - 1;
 
-	console.log(data.memoryArray);
-
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	for (let i = 0; i < arrayLengthY; i++) {
 		if (highlight.some(e => e === currentLocation[i]) === true) context.strokeStyle = graphColor?.highlightColor();
