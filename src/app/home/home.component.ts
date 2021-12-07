@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GetCookie, SetCookie } from '../../shared/cookies';
+import { GetCookie } from '../../shared/cookies';
 import { IDataPoint } from '../../shared/interfaces';
 import { sortGraph } from '../../shared/sortGraph';
 import { RenderGraph } from '../../shared/renderGraph';
@@ -62,11 +62,11 @@ export class HomeComponent {
 			if (graph.style.width === width) return;
 			graph.style.width = width;
 			graph.width = parseFloat(width);
-			RenderGraph(this.Coordinates);
+			RenderGraph(this.Coordinates, 'mustRender');
 		}
 		else {
 			graph.width = window.innerWidth * 0.8;
-			RenderGraph(this.Coordinates);
+			RenderGraph(this.Coordinates, 'mustRender');
 			if (graph.style.width === '80%') return;
 			graph.style.width = '80%';
 		}
@@ -74,7 +74,7 @@ export class HomeComponent {
   
 	ResetGraph = () => {
 		if (this.SortingInterval !== undefined) window.clearInterval(this.SortingInterval);
-    
+
 		sortGraph(this);
 	};
 }

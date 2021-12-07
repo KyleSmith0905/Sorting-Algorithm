@@ -14,7 +14,7 @@ const suspendSorting = (app: HomeComponent, graphData: any, message?: string) =>
 	if (typeof message === 'string') app.ErrorMessage = 'Error: ' + message;
 	app.Oscillator?.stop();
 	window.clearInterval(app.SortingInterval);
-	RenderGraph(app.Coordinates, graphData);
+	RenderGraph(app.Coordinates, 'mustRender', graphData);
 	return;
 };
 
@@ -59,7 +59,7 @@ export const sortGraph = (app: HomeComponent) => {
 
 	app.ErrorMessage = undefined;
 	
-	RenderGraph(app.Coordinates);
+	RenderGraph(app.Coordinates, 'regularRender', graphData);
 
 	const sortingAlgorithm = sortingAlgorithms.find(e => e.name === settings.SortingAlgorithm);
 	if (sortingAlgorithm === undefined) return suspendSorting(app, {}, 'Sorting Algorithm not found');
@@ -76,7 +76,7 @@ export const sortGraph = (app: HomeComponent) => {
 		speed *= 2;
 		speedPass++;
 	}
-
+	
 	let lowestValue = Number.POSITIVE_INFINITY;
 	let highestValue = Number.NEGATIVE_INFINITY;
 	for (let i = 0; i < app.Coordinates.length; i++) {
@@ -124,7 +124,7 @@ export const sortGraph = (app: HomeComponent) => {
 			app.Coordinates[data.highlight[i]].highlight = true;
 		}
 		
-		RenderGraph(app.Coordinates, graphData);
+		RenderGraph(app.Coordinates, 'regularRender', graphData);
 		
 		for (let i = 0; i < data.highlight.length; i++) {
 			if (app.Coordinates[data.highlight[i]] === undefined) continue;

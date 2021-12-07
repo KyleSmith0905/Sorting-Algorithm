@@ -47,7 +47,7 @@ export class submenuComponent {
 		
 		const textElement = document.getElementById('GraphTypeText');
 		if (textElement instanceof HTMLElement) textElement.innerText = 'Graph Type: ' + val;
-		RenderGraph(this.Coordinates);
+		RenderGraph(this.Coordinates, 'mustRender');
 	}
 	
 	SetGraphColor(object: Event | number) {
@@ -78,7 +78,7 @@ export class submenuComponent {
 			return 0;
 		});
 		
-		RenderGraph(this.Coordinates);
+		RenderGraph(this.Coordinates, 'mustRender');
 		
 		const textElement = document.getElementById('GraphColorText');
 		if (textElement instanceof HTMLElement) textElement.innerText = 'Graph Color: ' + val;

@@ -104,11 +104,7 @@ header {
 	margin-left: auto;
 	margin-right: auto;
 	padding: 1em;
-}
-
-#DataGraph canvas{
-	border: var(--border);
-	border-radius: var(--border-radius);
+	image-rendering: pixelated;
 }
 
 #BottomMenu {

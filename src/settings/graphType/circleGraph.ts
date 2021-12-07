@@ -2,14 +2,15 @@ import { IDataPoint } from 'src/shared/interfaces';
 import { graphColors, settings } from '../';
 
 export const name = 'Circle Graph';
-export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, data: any) => {
+export const render = (array: IDataPoint[], canvas: HTMLCanvasElement, data: any) => {
 		
 	const graphColor = graphColors.find(e => e.name === settings.GraphColor);
 	if (graphColor === undefined) return;
 	
-	const context = canvas.getContext('2d');
+	const context = canvas.getContext('2d', { alpha: false });
 	if (!context) return;
-	context.clearRect(0, 0, canvas.width, canvas.height);
+	context.fillStyle = '#ffffff';
+	context.fillRect(0, 0, canvas.width, canvas.height);
 	
 	const circumference = Math.PI * 2;
 	const dataLength = array.length;
@@ -27,3 +28,4 @@ export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, data: 
 		context.fill();
 	}
 };
+export const recordData = () => null;

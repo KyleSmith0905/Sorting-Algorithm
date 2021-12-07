@@ -2,14 +2,15 @@ import { IDataPoint } from 'src/shared/interfaces';
 import { graphColors, settings } from '../';
 
 export const name = 'Line Graph';
-export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, data: any) => {
+export const render = (array: IDataPoint[], canvas: HTMLCanvasElement, data: any) => {
 		
 	const graphColor = graphColors.find(e => e.name === settings.GraphColor);
 	if (graphColor === undefined) return;
 	
-	const context = canvas.getContext('2d');
+	const context = canvas.getContext('2d', { alpha: false });
 	if (!context) return;
-	context.clearRect(0, 0, canvas.width, canvas.height);
+	context.fillStyle = '#ffffff';
+	context.fillRect(0, 0, canvas.width, canvas.height);
 	
 	context.lineWidth = (canvas.height + 100) / (array.length);
 
@@ -29,3 +30,4 @@ export const algorithm = (array: IDataPoint[], canvas: HTMLCanvasElement, data: 
 	}
 	context.closePath();
 };
+export const recordData = () => null;
