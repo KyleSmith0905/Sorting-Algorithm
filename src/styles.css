@@ -37,11 +37,20 @@ header {
 	padding: 0.5em 1em;
 }
 
-#Title {
+#Title > a {
 	font-size: 1.4em;
 	margin: 0;
 	padding: 0;
 	text-align: center;
+}
+
+#Title > a, button {
+	text-decoration: underline solid transparent;
+	transition: var(--transition);
+}
+
+#Title > a:hover, button:hover {
+	text-decoration: underline solid var(--colorLight1);
 }
 
 #SortingWith {
@@ -60,23 +69,17 @@ header {
 }
 
 .Button {
-	text-decoration: underline solid transparent;
 	background-color: var(--colorDark3);
 	border: var(--border);
 	border-radius: var(--border-radius);
 	padding: 0.7em 1em;
 	cursor: pointer;
-	transition: var(--transition);
 	white-space: nowrap;
 	font-size: 1em;
 }
 
 .Button > p {
 	display: inline;
-}
-
-.Button:hover {
-	text-decoration-color: var(--colorLight1);
 }
 
 #MainContent {
