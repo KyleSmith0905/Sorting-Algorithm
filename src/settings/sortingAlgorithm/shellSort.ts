@@ -9,38 +9,74 @@ export const algorithm = (arr: IDataPoint[], data: any): [IDataPoint[], any] => 
 	
 	if (data.gaps === undefined) {
 		switch (data.settings.gap) {
-		case 'Tokuda': {
-			gaps.push(1);
-			let index = 1;
-			while (gaps[0] < arr.length) {
-				gaps.unshift(Math.ceil((9 * Math.pow(2.25, index) - 4) / 5));
-				index++;
+			case 'Knuth': {
+				gaps = [1];
+				while (gaps[0] < arr.length / 3) {
+					gaps.unshift((Math.pow(3, gaps.length) - 1) / 2);
+				}
+				gaps.pop();
+				break;
 			}
-			gaps.shift();
-			break;
-		}
-		case 'Shell': {
-			gaps.push(arr.length / 2);
-			while (gaps[gaps.length - 1] > 1) {
-				gaps.push(gaps[gaps.length - 1] / 2);
+			case 'Pratt': {
+				let power2 = 1;
+				while (power2 < arr.length) {
+					let power3 = 1;
+					while (power2 * power3 < arr.length) {
+						gaps.push(power2 * power3);
+						power3 *= 3;
+					}
+					power2 *= 2;
+				}
+				gaps.sort((a, b) => b - a);
+				break;
 			}
-			break;
-		}
-		case 'Hibbard': {
-			gaps.push(1);
-			let index = 2;
-			while (gaps[0] < arr.length) {
-				gaps.unshift(Math.pow(2, index) - 1);
-				index++;
+			case 'Frank and Lazarus': {
+				gaps = [arr.length];
+				while (gaps[gaps.length - 1] > 3) {
+					gaps.push(Math.round((2 * arr.length / Math.pow(2, gaps.length + 1)) + 1));
+				}
+				gaps.push(1);
+				gaps.shift();
+				break;
 			}
-			gaps.shift();
-			break;
-		}
-		default: gaps = [701, 301, 132, 57, 23, 10, 4, 1];
+			case 'Gonnet and Baeza-Yates': {
+				gaps = [arr.length];
+				while (gaps[gaps.length - 1] > 1) {
+					gaps.push(Math.round(Math.max((5 * gaps[gaps.length - 1] - 1) / 11, 1)));
+				}
+				gaps.shift();
+				break;
+			}
+			case 'Tokuda': {
+				gaps = [1];
+				while (gaps[0] < arr.length) {
+					gaps.unshift(Math.ceil((9 * Math.pow(2.25, gaps.length) - 4) / 5));
+				}
+				gaps.shift();
+				break;
+			}
+			case 'Shell': {
+				gaps.push(arr.length / 2);
+				while (gaps[gaps.length - 1] > 1) {
+					gaps.push(gaps[gaps.length - 1] / 2);
+				}
+				break;
+			}
+			case 'Hibbard': {
+				gaps.push(1);
+				while (gaps[0] < arr.length) {
+					gaps.unshift(Math.pow(2, gaps.length + 1) - 1);
+				}
+				gaps.shift();
+				break;
+			}
+			default: gaps = [701, 301, 132, 57, 23, 10, 4, 1];
 		}
 		data.gaps = gaps;
+		console.log(gaps);
 	}
 	else gaps = data.gaps;
+
 
 	if (data.gapIndex === undefined) data.gapIndex = 0;
 	const gap = gaps[data.gapIndex];

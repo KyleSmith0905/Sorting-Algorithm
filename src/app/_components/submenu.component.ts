@@ -174,7 +174,7 @@ export class submenuComponent {
 			object = (<HTMLInputElement>object.currentTarget).valueAsNumber;
 			SetCookie('ShellSortGap', object.toString());
 		}
-		const val = ['Ciura', 'Shell', 'Hibbard', 'Tokuda'][object];
+		const val = ['Ciura', 'Shell', 'Hibbard', 'Tokuda', 'Gonnet and Baeza-Yates', 'Pratt', 'Frank and Lazarus', 'Knuth'][object];
 		settings.ShellSortGap = val;
 		
 		const textElement = document.getElementById('ShellSortGapText');
