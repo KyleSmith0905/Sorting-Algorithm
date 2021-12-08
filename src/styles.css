@@ -44,12 +44,12 @@ header {
 	text-align: center;
 }
 
-#Title > a, button {
+#Title > a, .Button {
 	text-decoration: underline solid transparent;
 	transition: var(--transition);
 }
 
-#Title > a:hover, button:hover {
+#Title > a:hover, .Button:hover {
 	text-decoration: underline solid var(--colorLight1);
 }
 
@@ -137,8 +137,7 @@ header {
 }
 
 #SelectedSettings h2 {
-	font-size: 1.6em;
-	font-variant: small-caps;
+	font-size: 1.8em;
 	margin: 0.3em 0em 0em 0em;
 }
 
@@ -176,7 +175,8 @@ header {
 }
 
 #SelectAlgorithmMenu {
-	width: 90%;
+	font-size: 1.2em;
+	width: calc(85% - 1em);
 	margin-left: auto;
 	margin-right: auto;
 }
