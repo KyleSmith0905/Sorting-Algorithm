@@ -8,7 +8,7 @@ export const randomizeArray = (coordinates: IDataPoint[]): IDataPoint[] => {
 	const coordinatesLength = coordinates.length;
 
 	for (let i = 0; i < coordinatesLength; i++) {
-		const j = Math.floor(Math.random() * (coordinatesLength - i + 1));
+		const j = i + Math.floor(Math.random() * (coordinatesLength - i));
 		[coordinates[i], coordinates[j]] = [coordinates[j], coordinates[i]];
 	}
 
@@ -21,10 +21,8 @@ export const randomizeArray = (coordinates: IDataPoint[]): IDataPoint[] => {
  * @returns {boolean} - True if the array is sorted.
  */
 export const isArraySorted = (array: IDataPoint[]): boolean => {
-	const compare = (left: IDataPoint, right: IDataPoint) => left.data > right.data;
-
 	for (const [index, element] of array.entries()) {
-		if (array[index + 1] && compare(element, array[index + 1])) {
+		if (array[index + 1] && element > array[index + 1]) {
 			return false;
 		}
 	}
