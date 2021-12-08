@@ -37,11 +37,11 @@ header {
 	padding: 0.5em 1em;
 }
 
-#Title > a {
+#Title {
 	font-size: 1.4em;
+	text-align: center;
 	margin: 0;
 	padding: 0;
-	text-align: center;
 }
 
 #Title > a, .Button {
