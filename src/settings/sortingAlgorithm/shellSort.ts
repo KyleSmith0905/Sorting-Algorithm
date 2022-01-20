@@ -73,7 +73,6 @@ export const algorithm = (arr: IDataPoint[], data: any): [IDataPoint[], any] => 
 			default: gaps = [701, 301, 132, 57, 23, 10, 4, 1];
 		}
 		data.gaps = gaps;
-		console.log(gaps);
 	}
 	else gaps = data.gaps;
 
