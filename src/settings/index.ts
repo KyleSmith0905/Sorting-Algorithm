@@ -30,7 +30,7 @@ export const defaultSettings = {
 	SortingAlgorithm: sortingAlgorithms[Math.floor(Math.random() * sortingAlgorithms.length)].name,
 	SortSpeed: 1,
 	SampleSize: 8,
-	GraphType: graphTypes.findIndex(e => e.name === 'History Graph'),
+	GraphType: graphTypes.findIndex(e => e.name === 'Bar Graph'),
 	GraphColor: graphColors.findIndex(e => e.name === 'Rainbow'),
 	SampleType: sampleTypes.findIndex(e => e.name === 'Linear'),
 	SampleOrder: sampleOrders.findIndex(e => e.name === 'Random'),
